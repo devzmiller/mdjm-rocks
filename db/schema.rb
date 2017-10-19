@@ -15,6 +15,15 @@ ActiveRecord::Schema.define(version: 20171020014323) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
+  create_table "orders", force: :cascade do |t|
+    t.integer "orderer_id"
+    t.integer "receiver_id"
+    t.datetime "received_date"
+    t.boolean "submitted"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "parts", force: :cascade do |t|
     t.integer "part_number", null: false
     t.string "name", null: false
