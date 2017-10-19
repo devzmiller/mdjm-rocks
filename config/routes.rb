@@ -5,4 +5,7 @@ Rails.application.routes.draw do
   resources :warehouses, only: [:new, :create] do
     resources :parts, only: [:index]
   end
+
+  resources :orders, only: [:index]
+
 end
