@@ -84,5 +84,13 @@ RSpec.describe OrdersController, type: :controller do
       end
     end
 
+    context "when submitting complete order" do
+      it "marks the order as submitted" do
+        put :update, params: {id: order.id, submit: 'true'},
+                      session: {user_id: user.id}
+        expect(Order.find(order.id).submitted).to eq true
+      end
+    end
+
   end
 end

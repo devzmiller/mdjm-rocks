@@ -1,6 +1,6 @@
 FactoryGirl.define do
   factory :order do
-    submitted true
+    submitted false
     orderer
   end
 end
