@@ -1,5 +1,7 @@
 <h1 class="order-form-header">Create a New Order</h1>
 
+<%= link_to "All Orders", orders_path %>
+
 <% if !@order.submitted %>
   <div class="order-form">
     <%= form_tag order_path(@order.id), method: :put do %>
