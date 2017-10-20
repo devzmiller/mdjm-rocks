@@ -40,6 +40,13 @@ class OrdersController < ApplicationController
   def update
     @order = Order.find(params[:id])
 
+    if @order.submitted
+      # update all received quantities in parts
+      # set received date to today
+      # redirect to order show page
+      return
+    end
+
     if params[:submit] == 'true'
       @order.submitted = true;
       @order.save!
