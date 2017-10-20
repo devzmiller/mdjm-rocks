@@ -70,4 +70,19 @@ RSpec.describe OrdersController, type: :controller do
       expect(assigns[:order]).to eq(Order.find(order.id))
     end
   end
+
+  describe "#update" do
+    let (:order) { create :order }
+    let(:part) { create :part }
+
+    context "valid input" do
+      before(:each) { put :update, params: {id: order.id, part_num: part.part_number, part: part.name, quantity: 10},
+                                  session: {user_id: user.id}}
+
+      it "redirects back to order show page" do
+        expect(response).to redirect_to(order_path(order))
+      end
+    end
+
+  end
 end
