@@ -52,7 +52,7 @@
           <% if @order.received_date %>
             <td><%= entry.quantity_received %></td>
           <% else %>
-          <td><%= text_field_tag "#{entry.id}", nil, :required => true %></td>
+          <td><%= text_field_tag "#{entry.part.id}", nil, :required => true %></td>
           <% end %>
           <td><%= entry.discrepancy %></td>
         <% end %>
@@ -60,7 +60,7 @@
     <% end %>
   </table>
 
-  <% if !@order.received_date %>
+  <% if @order.submitted && !@order.received_date %>
     <%= submit_tag "Finalize Order" %>
   <% end %>
 <% end %>

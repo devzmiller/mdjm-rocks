@@ -1,3 +1,5 @@
+require 'date'
+
 class OrdersController < ApplicationController
 
   def index
@@ -41,9 +43,31 @@ class OrdersController < ApplicationController
     @order = Order.find(params[:id])
 
     if @order.submitted
+      # receiver to current user
+      @order.receiver = User.find(session[:user_id])
+      @order.save
+
       # update all received quantities in parts
+      @order.orders_parts.each do |order_part|
+        order_part.quantity_received = params["#{order_part.part_id}"]
+        order_part.save
+      end
+
       # set received date to today
+      @order.received_date = DateTime.now
+      @order.save
+
+      # update inventory
+      warehouse = @order.receiver.warehouse
+      @order.orders_parts.each do |order_part|
+        order_part.quantity_received.times do
+          part = order_part.part
+          WarehousesPart.create(part: part, warehouse: warehouse)
+        end
+      end
+
       # redirect to order show page
+      redirect_to order_path(@order)
       return
     end
 
