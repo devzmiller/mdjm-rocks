@@ -9,30 +9,23 @@ class OrdersController < ApplicationController
   end
 
   def create
-    # Look for a part by its part number
-    part = Part.find_or_initialize_by(part_number: params[:part_num])
+    @part = Part.find_by(part_number: params[:part_num]) || Part.find_by(name: params[:part])
     @errors = []
-    # If part.name is initialized, then the part must have already existed
-    if part.name
-      # Check if user got part name correct
-      if part.name == params[:part]
-        # If so, add the part to that order for that quantity
-        @order = Order.create(orderer_id: session[:user_id], submitted: false)
-        order_part = OrdersPart.create(quantity_ordered: params[:quantity], part: part, order: @order)
-        @errors += @order.errors.full_messages
-        @errors += order_part.errors.full_messages
-      else
+
+    if @part
+      if @part.name != params[:part] || @part.part_number != params[:part_num].to_i
         @errors << "Part name is invalid"
       end
     else
-      # If part.name isn't initialized, we made a new part, initialize the other attributes
-      part.update_attributes(name: params[:part], max_quantity: 100)
-      # Then add the part to that order for that quantity
-      @order = Order.create(orderer_id: session[:user_id], submitted: false)
-      order_part = OrdersPart.create!(quantity_ordered: params[:quantity], part: part, order: @order)
-      @errors += @order.errors.full_messages
-      @errors << order_part.errors.full_messages
+      @part = Part.create(name: params[:part], max_quantity: 100, part_number: params[:part_num])
+      @errors += @part.errors.full_messages
     end
+
+    @order = Order.create(orderer_id: session[:user_id], submitted: false)
+    order_part = OrdersPart.create(quantity_ordered: params[:quantity], part: @part, order: @order)
+    @errors += @order.errors.full_messages
+    @errors += order_part.errors.full_messages
+
     if @errors == []
       redirect_to order_path(@order)
     else
@@ -46,6 +39,7 @@ class OrdersController < ApplicationController
 
   def update
     @order = Order.find(params[:id])
+
     if params[:submit] == 'true'
       @order.submitted = true;
       @order.save!
@@ -53,23 +47,22 @@ class OrdersController < ApplicationController
       return
     end
 
-    @part = Part.find_or_initialize_by(part_number: params[:part_num])
+    @part = Part.find_by(part_number: params[:part_num]) || Part.find_by(name: params[:part])
     @errors = []
-    if @part.name
-      if @part.name == params[:part]
-        order_part = OrdersPart.create(quantity_ordered: params[:quantity], part: @part, order: @order)
-        @errors += order_part.errors.full_messages
-      else
+
+    if @part
+      if @part.name != params[:part] || @part.part_number != params[:part_num].to_i
         @errors << "Part name is invalid"
       end
     else
-      @part.update_attributes(name: params[:part], max_quantity: 100)
-      order_part = OrdersPart.create!(quantity_ordered: params[:quantity], part: @part, order: @order)
+      @part = Part.create(name: params[:part], max_quantity: 100, part_number: params[:part_num])
       @errors += @part.errors.full_messages
-      @errors += order_part.errors.full_messages
     end
 
-    if @errors == []
+    order_part = OrdersPart.new(quantity_ordered: params[:quantity], part: @part, order: @order)
+    @errors += order_part.errors.full_messages
+
+    if @errors == [] && order_part.save
       redirect_to order_path(@order)
     else
       render :show

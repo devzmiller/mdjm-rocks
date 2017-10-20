@@ -2,6 +2,8 @@
 
 <%= link_to "All Orders", orders_path %>
 
+<%= render 'shared/errors' %>
+
 <% if !@order.submitted %>
   <div class="order-form">
     <%= form_tag order_path(@order.id), method: :put do %>
