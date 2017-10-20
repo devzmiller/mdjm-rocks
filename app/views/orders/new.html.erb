@@ -1,18 +1,20 @@
-<div id="login-form-div">
-  <%= form_tag orders_path, id: 'login-form', method: :post %>
-    <div class="form-section">
+<h1 class="order-form-header">Create a New Order</h1>
+
+<div class="order-form">
+  <%= form_tag orders_path, method: :post %>
+    <div>
       <%= label_tag 'Part Name' %>
       <%= text_field_tag 'part' %>
     </div>
-    <div class="form-section">
+    <div>
       <%= label_tag 'Part Number' %>
       <%= text_field_tag 'part_num' %>
     </div>
-    <div class="form-section">
+    <div>
       <%= label_tag 'Quantity' %>
       <%= text_field_tag 'quantity' %>
     </div>
-    <div class="form-section">
+    <div>
       <%= submit_tag 'Add Item' %>
       <%= submit_tag 'Create Order' %>
     </div>
