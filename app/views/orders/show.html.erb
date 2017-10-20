@@ -1,0 +1,42 @@
+<h1>   </h1>
+
+<% if !@order.submitted %>
+  <div id="login-form-div">
+    <%= form_tag order_path(@order.id), id: 'login-form', method: :put %>
+      <%= hidden_field_tag 'submit', 'false' %>
+      <div class="form-section">
+        <%= label_tag 'Part Name' %>
+        <%= text_field_tag 'part' %>
+      </div>
+      <div class="form-section">
+        <%= label_tag 'Part Number' %>
+        <%= text_field_tag 'part_num' %>
+      </div>
+      <div class="form-section">
+        <%= label_tag 'Quantity' %>
+        <%= text_field_tag 'quantity' %>
+      </div>
+      <div class="form-section">
+        <%= submit_tag 'Add Another Item' %>
+      </div>
+    <%= form_tag order_path(@order.id), id: 'login-form', method: :put %>
+      <%= hidden_field_tag 'submit', 'true' %>
+      <%= submit_tag 'Create Order' %>
+  </div>
+<% end %>
+
+
+<table class="inventory-table">
+  <tr>
+    <th>Part Name</th>
+    <th>Part Number</th>
+    <th>Quantity</th>
+  </tr>
+  <% @order.orders_parts.each do |entry| %>
+    <tr>
+      <td><%= entry.part.name %></td>
+      <td><%= entry.part.part_number %></td>
+      <td><%= entry.quantity_ordered %></td>
+    </tr>
+  <% end %>
+</table>

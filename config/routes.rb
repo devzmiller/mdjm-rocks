@@ -6,6 +6,6 @@ Rails.application.routes.draw do
     resources :parts, only: [:index]
   end
 
-  resources :orders, only: [:index, :create, :new, :show]
+  resources :orders, only: [:index, :create, :new, :show, :update]
 
 end

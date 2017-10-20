@@ -13,7 +13,11 @@ end
 
 3.times do
   user = User.create(name: 'Jo Schmo', employee_num: Random.rand(500), password: 'cher', role: 'manager')
-  Order.create!(orderer_id: user.id, received_date: DateTime.now + 5, submitted: true)
+  order = Order.create!(orderer_id: user.id, received_date: DateTime.now + 5, submitted: true)
+  30.times do
+    part = Part.create(part_number: Faker::Number.number(5), name: Faker::Pokemon.move, max_quantity: 50)
+    OrdersPart.create(order: order, part: part, quantity_ordered: 13)
+  end
 end
 
 User.create(employee_num: 123, password: 'a')
