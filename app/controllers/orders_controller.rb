@@ -25,7 +25,6 @@ class OrdersController < ApplicationController
 
     warehouse = Warehouse.find_by_name(params[:warehouse])
     if !warehouse
-      puts "****************************************"
       @errors << "Please check warehouse spelling."
       render :new
       return
