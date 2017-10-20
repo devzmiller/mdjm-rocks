@@ -1,17 +1,29 @@
 <%= form_for @user do |f| %>
-  <%= f.label "Name: " %>
-  <%= f.text_field :name %>
-  <%= f.label "Employee Number: " %>
-  <%= f.text_field :employee_num %>
-  <%= f.label "Password: " %>
-  <%= f.password_field :password %>
-  <%= radio_button_tag(:role, "manager") %>
-  <%= label_tag(:role_manager, "Manager") %>
-  <%= radio_button_tag(:role, "scientist") %>
-  <%= label_tag(:role_scientist, "Scientist") %>
-  <%= radio_button_tag(:role, "warehouse") %>
-  <%= label_tag(:role_warehouse, "Warehouse") %>
-  <%= f.label "Warehouse: " %>
-  <%= f.text_field :warehouse %>
-  <%= f.submit "Create New Employee" %>
+  <div class="form-section">
+    <%= f.label "Name: " %>
+    <%= f.text_field :name, required: true %>
+  </div>
+  <div class="form-section">
+    <%= f.label "Employee Number: " %>
+    <%= f.text_field :employee_num, required: true %>
+  </div>
+  <div class="form-section">
+    <%= f.label "Password: " %>
+    <%= f.password_field :password, required: true %>
+  </div>
+  <div class="form-section">
+    <%= radio_button_tag(:role, "manager", required: true) %>
+    <%= label_tag(:role_manager, "Manager") %>
+    <%= radio_button_tag(:role, "scientist", required: true) %>
+    <%= label_tag(:role_scientist, "Scientist") %>
+    <%= radio_button_tag(:role, "warehouse", required: true) %>
+    <%= label_tag(:role_warehouse, "Warehouse") %>
+  </div>
+  <div class="form-section">
+    <%= f.label "Warehouse: " %>
+    <%= f.text_field :warehouse, required: true %>
+  </div>
+  <div class="form-section">
+    <%= f.submit "Create New Employee" %>
+  </div>
 <% end %>
