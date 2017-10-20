@@ -1,17 +1,23 @@
 <div id="login-form-div">
-  <%= form_tag sessions_path, id: "login-form" do %>
-    <div class="form-section">
-      <%= label_tag :employee_num, "Employee Number:" %>
-      <%= text_field_tag :employee_num %>
-    </div>
-    <div class="form-section">
-      <%= label_tag :password, "Password:" %>
-      <%= password_field_tag :password %>
-    </div>
-    <div class="form-section">
-      <%= submit_tag "Login" %>
-    </div>
-  <% end %>
+  <div class="login-container">
+    <%= form_tag sessions_path, id: "login-form" do %>
+      <div class="form-section">
+        <%= label_tag :employee_num, "Employee Number:" %>
+      </div>
+      <div class="form-section">
+        <%= text_field_tag :employee_num %>
+      </div>
+      <div class="form-section">
+        <%= label_tag :password, "Password:" %>
+      </div>
+      <div class="form-section">
+        <%= password_field_tag :password %>
+      </div>
+      <div class="form-section">
+        <%= submit_tag "Login" %>
+      </div>
+    <% end %>
+  </div>
 
   <div class="errors" id='login-errors'>
     <%= render 'shared/errors' %>

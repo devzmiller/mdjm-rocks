@@ -1,56 +1,71 @@
-<h1 class="order-form-header">Order No. <%= @order.id %></h1>
+<h2 class="order-form-header">Order No. <%= @order.id %></h2>
 
 <%= link_to "All Orders", orders_path %>
 
 <%= render 'shared/errors' %>
 
 <% if !@order.submitted %>
-  <div class="order-form">
-    <%= form_tag order_path(@order.id), method: :put do %>
-      <div>
-        <%= label_tag 'Part Name' %>
-        <%= text_field_tag 'part' %>
-      </div>
-      <div>
-        <%= label_tag 'Part Number' %>
-        <%= text_field_tag 'part_num' %>
-      </div>
-      <div>
-        <%= label_tag 'Quantity' %>
-        <%= text_field_tag 'quantity' %>
-      </div>
-      <div>
-        <%= submit_tag 'Add Item' %>
-      </div>
-    <% end %>
+  <div class="order-container">
+    <div class="order-form">
+      <%= form_tag order_path(@order.id), method: :put do %>
+        <div>
+          <%= label_tag 'Part Name' %>
+          <%= text_field_tag 'part' %>
+        </div>
+        <div>
+          <%= label_tag 'Part Number' %>
+          <%= text_field_tag 'part_num' %>
+        </div>
+        <div>
+          <%= label_tag 'Quantity' %>
+          <%= text_field_tag 'quantity' %>
+        </div>
+        <div>
+          <%= submit_tag 'Add Item' %>
+        </div>
+      <% end %>
 
-    <%= form_tag order_path(@order.id), id: 'create-order-form', method: :put do %>
-      <%= hidden_field_tag 'submit', 'true' %>
-      <%= submit_tag 'Create Order' %>
-    <% end %>
+      <%= form_tag order_path(@order.id), id: 'create-order-form', method: :put do %>
+        <%= hidden_field_tag 'submit', 'true' %>
+        <%= submit_tag 'Create Order' %>
+      <% end %>
+    </div>
   </div>
 <% end %>
 
+<h3><%= @order.warehouse.name %></h3>
 
-<table class="inventory-table">
-  <tr>
-    <th>Part Name</th>
-    <th>Part Number</th>
-    <th>Order Quantity</th>
-    <% if @order.submitted %>
-      <th>Received Quantity</th>
-      <th>Discrepancy</th>
-    <% end %>
-  </tr>
-  <% @order.orders_parts.each do |entry| %>
+<%= form_tag order_path(@order), method: 'patch' do %>
+  <table class="inventory-table">
+    <%= hidden_field_tag 'wenis', 'hi' %>
     <tr>
-      <td><%= entry.part.name %></td>
-      <td><%= entry.part.part_number %></td>
-      <td><%= entry.quantity_ordered %></td>
+      <th>Part Name</th>
+      <th>Part Number</th>
+      <th>Order Quantity</th>
       <% if @order.submitted %>
-        <td><%= entry.quantity_received || 0 %></td>
-        <td><%= entry.discrepancy %></td>
+        <th>Received Quantity</th>
+        <th>Discrepancy</th>
       <% end %>
     </tr>
+    <% @order.orders_parts.each do |entry| %>
+      <tr>
+        <td><%= entry.part.name %></td>
+        <td><%= entry.part.part_number %></td>
+        <td><%= entry.quantity_ordered %></td>
+
+        <% if @order.submitted %>
+          <% if @order.received_date %>
+            <td><%= entry.quantity_received %></td>
+          <% else %>
+          <td><%= text_field_tag "#{entry.part.id}", nil, :required => true %></td>
+          <% end %>
+          <td><%= entry.discrepancy %></td>
+        <% end %>
+      </tr>
+    <% end %>
+  </table>
+
+  <% if @order.submitted && !@order.received_date %>
+    <%= submit_tag "Finalize Order" %>
   <% end %>
-</table>
+<% end %>

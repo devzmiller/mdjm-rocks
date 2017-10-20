@@ -3,22 +3,27 @@
 <%= link_to "All Orders", orders_path %>
 
 <%= render 'shared/errors' %>
-
-<div class="order-form">
-  <%= form_tag orders_path, method: :post %>
-    <div>
-      <%= label_tag 'Part Name' %>
-      <%= text_field_tag 'part' %>
-    </div>
-    <div>
-      <%= label_tag 'Part Number' %>
-      <%= text_field_tag 'part_num' %>
-    </div>
-    <div>
-      <%= label_tag 'Quantity' %>
-      <%= text_field_tag 'quantity' %>
-    </div>
-    <div>
-      <%= submit_tag 'Add Item' %>
-    </div>
+<div class="order-container">  
+  <div class="order-form">
+    <%= form_tag orders_path, method: :post %>
+      <div>
+        <%= label_tag 'Warehouse' %>
+        <%= text_field_tag 'warehouse' %>
+      </div>
+      <div>
+        <%= label_tag 'Part Name' %>
+        <%= text_field_tag 'part' %>
+      </div>
+      <div>
+        <%= label_tag 'Part Number' %>
+        <%= text_field_tag 'part_num' %>
+      </div>
+      <div>
+        <%= label_tag 'Quantity' %>
+        <%= text_field_tag 'quantity' %>
+      </div>
+      <div>
+        <%= submit_tag 'Add Item' %>
+      </div>
+  </div>
 </div>

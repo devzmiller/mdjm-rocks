@@ -8,5 +8,5 @@ Rails.application.routes.draw do
   end
 
   resources :orders, only: [:index, :create, :new, :show, :update]
-
+  
 end

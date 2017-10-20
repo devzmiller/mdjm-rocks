@@ -30,8 +30,9 @@ RSpec.describe OrdersController, type: :controller do
 
   describe "#create" do
     let(:part) { create :part }
+    let(:warehouse) { create :warehouse }
     context "valid input" do
-      before(:each) { post :create, params: {part_num: part.part_number, part: part.name, quantity: 10},
+      before(:each) { post :create, params: {part_num: part.part_number, part: part.name, quantity: 10, warehouse: warehouse.name},
                                     session: {user_id: user.id}}
       it "creates a new order" do
         expect(assigns[:order]).to eq(Order.last)

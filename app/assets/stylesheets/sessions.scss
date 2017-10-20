@@ -3,21 +3,30 @@
 #login-form-div {
   padding-top: 20px;
   width: 30%;
+  border-radius: 30px;
+  background: $light_gray;
   margin: auto;
+  margin-top: 50px;
 }
 
 .form-section {
   padding: 10px;
-  float: right;
+  float: center;
   clear: both;
+  text-align: center;
+
+  input[type=submit] {
+    width: 190px;
+  }
 }
 
 #tag-line {
   clear: both;
   text-align: center;
   font-size: 1.3em;
-  padding-top: 20px;
+  padding-top: 50px;
   text-shadow: 0 0 5px $lime;
+  padding-bottom: 10px;
 }
 
 #login-errors {
@@ -25,4 +34,8 @@
   ul {
     list-style-type: none;
   }
+}
+
+.login-container {
+  height: 200px;
 }

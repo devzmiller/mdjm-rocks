@@ -1,3 +1,5 @@
+require 'date'
+
 class OrdersController < ApplicationController
 
   def index
@@ -21,7 +23,14 @@ class OrdersController < ApplicationController
       @errors += @part.errors.full_messages
     end
 
-    @order = Order.create(orderer_id: session[:user_id], submitted: false)
+    warehouse = Warehouse.find_by_name(params[:warehouse])
+    if !warehouse
+      @errors << "Please check warehouse spelling."
+      render :new
+      return
+    end
+
+    @order = Order.create(orderer_id: session[:user_id], submitted: false, warehouse: warehouse)
     order_part = OrdersPart.create(quantity_ordered: params[:quantity], part: @part, order: @order)
     @errors += @order.errors.full_messages
     @errors += order_part.errors.full_messages
@@ -30,6 +39,7 @@ class OrdersController < ApplicationController
       redirect_to order_path(@order)
     else
       render :new
+      return
     end
   end
 
@@ -39,6 +49,35 @@ class OrdersController < ApplicationController
 
   def update
     @order = Order.find(params[:id])
+
+    if @order.submitted
+      # receiver to current user
+      @order.receiver = User.find(session[:user_id])
+      @order.save
+
+      # update all received quantities in parts
+      @order.orders_parts.each do |order_part|
+        order_part.quantity_received = params["#{order_part.part_id}"]
+        order_part.save
+      end
+
+      # set received date to today
+      @order.received_date = DateTime.now
+      @order.save
+
+      # update inventory
+      warehouse = @order.warehouse
+      @order.orders_parts.each do |order_part|
+        order_part.quantity_received.times do
+          part = order_part.part
+          WarehousesPart.create(part: part, warehouse: warehouse)
+        end
+      end
+
+      # redirect to order show page
+      redirect_to order_path(@order)
+      return
+    end
 
     if params[:submit] == 'true'
       @order.submitted = true;
