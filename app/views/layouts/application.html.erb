@@ -10,7 +10,7 @@
 
   <body>
     <div class="top-bar">
-      <img id='logo' src="/logo2.png" height="70">
+      <%=image_tag("logo2.png", alt: "Rutherford Rockets Logo", id: 'logo')%>
       <h1 id="company-name">Rutherford Rocket Labs</h1>
       <% if session[:user_id] %>
         <%= form_tag session_path(session[:user_id]), method: :delete do %>
