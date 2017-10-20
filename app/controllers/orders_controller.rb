@@ -57,12 +57,8 @@ class OrdersController < ApplicationController
     @errors = []
     if @part.name
       if @part.name == params[:part]
-        if @order.parts.include?(@part)
-          @order.parts
-        else
-          order_part = OrdersPart.create(quantity_ordered: params[:quantity], part: @part, order: @order)
-          @errors += order_part.errors.full_messages
-        end
+        order_part = OrdersPart.create(quantity_ordered: params[:quantity], part: @part, order: @order)
+        @errors += order_part.errors.full_messages
       else
         @errors << "Part name is invalid"
       end
