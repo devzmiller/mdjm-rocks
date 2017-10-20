@@ -3,5 +3,9 @@ class Order < ApplicationRecord
   has_many :orders_parts
   has_many :parts, through: :orders_parts
   belongs_to :orderer, class_name: 'User'
-  belongs_to :receiver, class_name: 'User'
+  belongs_to :receiver, class_name: 'User', optional: true
+
+  def in_shipment?
+    submitted
+  end
 end
