@@ -9,22 +9,28 @@ class OrdersController < ApplicationController
   end
 
   def create
-    @part = Part.find_or_initialize_by(part_number: params[:part_num])
-    if @part.name
-      if @part.name == params[:part]
-        @order = Order.create!(orderer_id: session[:user_id], submitted: false)
-        OrdersPart.create!(quantity_ordered: params[:quantity], part: @part, order: @order)
-        redirect_to order_path(@order)
+    part = Part.find_or_initialize_by(part_number: params[:part_num])
+    @errors = []
+    if part.name
+      if part.name == params[:part]
+        @order = Order.create(orderer_id: session[:user_id], submitted: false)
+        order_part = OrdersPart.create(quantity_ordered: params[:quantity], part: part, order: @order)
+        @errors << @order.errors.full_messages
+        @errors << order_part.errors.full_messages
       else
-        @errors = ["Part name is invalid"]
-        render :new
+        @errors << "Part name is invalid"
       end
     else
-      @part.name = params[:part]
-      @part.max_quantity = 100
-      @order = Order.create!(orderer_id: session[:user_id], submitted: false)
-      OrdersPart.create!(quantity_ordered: params[:quantity], part: @part, order: @order)
+      part.update_attributes(name: params[:part], max_quantity: 100)
+      @order = Order.create(orderer_id: session[:user_id], submitted: false)
+      order_part = OrdersPart.create!(quantity_ordered: params[:quantity], part: part, order: @order)
+      @errors << @order.errors.full_messages
+      @errors << order_part.errors.full_messages
+    end
+    if @errors == []
       redirect_to order_path(@order)
+    else
+      render :new
     end
   end
 
