@@ -39,6 +39,7 @@
     <th>Order Quantity</th>
     <% if @order.submitted %>
       <th>Received Quantity</th>
+      <th>Discrepancy</th>
     <% end %>
   </tr>
   <% @order.orders_parts.each do |entry| %>
@@ -48,6 +49,7 @@
       <td><%= entry.quantity_ordered %></td>
       <% if @order.submitted %>
         <td><%= entry.quantity_received || 0 %></td>
+        <td><%= (entry.quantity_received || 0) - entry.quantity_ordered %></td>
       <% end %>
     </tr>
   <% end %>
