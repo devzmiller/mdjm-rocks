@@ -1,0 +1,17 @@
+<%= form_for @user do |f| %>
+  <%= f.label "Name: " %>
+  <%= f.text_field :name %>
+  <%= f.label "Employee Number: " %>
+  <%= f.text_field :employee_num %>
+  <%= f.label "Password: " %>
+  <%= f.password_field :password %>
+  <%= radio_button_tag(:role, "manager") %>
+  <%= label_tag(:role_manager, "Manager") %>
+  <%= radio_button_tag(:role, "scientist") %>
+  <%= label_tag(:role_scientist, "Scientist") %>
+  <%= radio_button_tag(:role, "warehouse") %>
+  <%= label_tag(:role_warehouse, "Warehouse") %>
+  <%= f.label "Warehouse: " %>
+  <%= f.text_field :warehouse %>
+  <%= f.submit "Create New Employee" %>
+<% end %>
