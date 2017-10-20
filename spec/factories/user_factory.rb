@@ -1,13 +1,8 @@
 FactoryGirl.define do
-  factory :user do
+  factory :user, aliases: [:orderer] do
     name "Wilfred"
-    employee_num 12345
+    sequence(:employee_num, 1000)
     password "password"
     role "manager"
-  end
-  factory :order do
-    submitted true
-    # orderer FactoryGirl.create(:user)
-    # receiver FactoryGirl.create(:user)
   end
 end

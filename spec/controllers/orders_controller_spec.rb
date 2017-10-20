@@ -1,6 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe OrdersController, type: :controller do
+  let(:user) { create :user }
   describe "index" do
     before(:each) { get :index }
     it "returns 200 status code" do
@@ -30,7 +31,6 @@ RSpec.describe OrdersController, type: :controller do
 
   describe "#create" do
     let(:part) { create :part }
-    let(:user) { create :user }
     context "valid input" do
       before(:each) { post :create, params: {part_num: part.part_number, part: part.name, quantity: 10},
                                     session: {user_id: user.id}}
@@ -56,6 +56,19 @@ RSpec.describe OrdersController, type: :controller do
 
         expect(response).to render_template(:new)
       end
+    end
+  end
+
+  describe "#show" do
+    let (:order) { create :order }
+    before(:each) { get :show, params: {id: order.id},
+                              session: {user_id: user.id}}
+    it "returns 200" do
+      expect(response).to be_ok
+    end
+
+    it "assigns @order to current order" do
+      expect(assigns[:order]).to eq(Order.find(order.id))
     end
   end
 end
