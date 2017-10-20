@@ -10,7 +10,7 @@ RSpec.describe OrdersController, type: :controller do
     it "assigns all orders to be @orders" do
       user = create :user
       5.times do
-        create(:order, orderer: user, receiver: user)
+        create(:order, orderer: user)
       end
       expect(assigns[:orders]).to eq(Order.all)
     end
