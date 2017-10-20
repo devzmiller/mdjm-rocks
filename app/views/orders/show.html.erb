@@ -36,13 +36,19 @@
   <tr>
     <th>Part Name</th>
     <th>Part Number</th>
-    <th>Quantity</th>
+    <th>Order Quantity</th>
+    <% if @order.submitted %>
+      <th>Received Quantity</th>
+    <% end %>
   </tr>
   <% @order.orders_parts.each do |entry| %>
     <tr>
       <td><%= entry.part.name %></td>
       <td><%= entry.part.part_number %></td>
       <td><%= entry.quantity_ordered %></td>
+      <% if @order.submitted %>
+        <td><%= entry.quantity_received || 0 %></td>
+      <% end %>
     </tr>
   <% end %>
 </table>
