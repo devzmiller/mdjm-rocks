@@ -67,7 +67,7 @@ class OrdersController < ApplicationController
       @order.save
 
       # update inventory
-      warehouse = @order.receiver.warehouse
+      warehouse = @order.warehouse
       @order.orders_parts.each do |order_part|
         order_part.quantity_received.times do
           part = order_part.part
