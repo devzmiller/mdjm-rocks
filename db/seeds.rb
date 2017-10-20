@@ -18,7 +18,7 @@ end
   order = Order.create!(orderer: user, received_date: DateTime.now + 5, submitted: true)
   30.times do
     part = Part.create(part_number: Faker::Number.number(5), name: Faker::Pokemon.move, max_quantity: 50)
-    OrdersPart.create(order: order, part: part, quantity_ordered: 13)
+    OrdersPart.create(order: order, part: part, quantity_ordered: 13, quantity_received: 13)
   end
 end
 
