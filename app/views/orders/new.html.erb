@@ -1,8 +1,5 @@
-<%= render 'shared/errors' %>
-
 <div id="login-form-div">
   <%= form_tag orders_path, id: 'login-form', method: :post %>
-    <%= render "shared/errors", object: @order_part %>
     <div class="form-section">
       <%= label_tag 'Part Name' %>
       <%= text_field_tag 'part' %>
