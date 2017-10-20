@@ -87,6 +87,17 @@ RSpec.describe OrdersController, type: :controller do
                                     session: {user_id: user.id}
         expect(Part.last.name).to eq("Rocket Launcher")
       end
+
+      it "updates part ordered_quantity if part has already been added to order" do
+        order_part = create(:ordersPart)
+        order = order_part.order
+        part = order_part.part
+        initialQuantiy = order_part.quantity_ordered
+        new_quantity = 10
+        put :update, params: {id: order.id, part: part.name, part_num: part.part_number, quantity: new_quantity},
+                      session: {user_id: user.id}
+        expect(OrdersPart.find_by(order: order, part: order_part.part).quantity_ordered).to eq(new_quantity + initialQuantiy)
+      end
     end
 
     context "invalid form input" do

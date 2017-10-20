@@ -59,7 +59,12 @@ class OrdersController < ApplicationController
       @errors += @part.errors.full_messages
     end
 
-    order_part = OrdersPart.new(quantity_ordered: params[:quantity], part: @part, order: @order)
+    if @order.parts.include?(@part)
+      order_part = OrdersPart.find_by(part: @part, order: @order)
+      order_part.update_attributes(quantity_ordered: order_part.quantity_ordered + params[:quantity].to_i)
+    else
+      order_part = OrdersPart.new(quantity_ordered: params[:quantity], part: @part, order: @order)
+    end
     @errors += order_part.errors.full_messages
 
     if @errors == [] && order_part.save
