@@ -14,7 +14,7 @@ class OrdersController < ApplicationController
 
     if @part
       if @part.name != params[:part] || @part.part_number != params[:part_num].to_i
-        @errors << "Part name is invalid"
+        @errors << "Use correct part name/number. #{@part.name}, no. #{@part.part_number}."
       end
     else
       @part = Part.create(name: params[:part], max_quantity: 100, part_number: params[:part_num])
@@ -52,7 +52,7 @@ class OrdersController < ApplicationController
 
     if @part
       if @part.name != params[:part] || @part.part_number != params[:part_num].to_i
-        @errors << "Part name is invalid"
+        @errors << "Use correct part name/number. #{@part.name} has the number #{@part.part_number}, not #{params[:part_num]}"
       end
     else
       @part = Part.create(name: params[:part], max_quantity: 100, part_number: params[:part_num])
