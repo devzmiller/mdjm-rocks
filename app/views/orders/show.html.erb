@@ -1,26 +1,26 @@
-<h1>   </h1>
+<h1 class="order-form-header">Create a New Order</h1>
 
 <% if !@order.submitted %>
-  <div id="login-form-div">
-    <%= form_tag order_path(@order.id), id: 'login-form', method: :put do %>
-      <div class="form-section">
+  <div class="order-form">
+    <%= form_tag order_path(@order.id), method: :put do %>
+      <div>
         <%= label_tag 'Part Name' %>
         <%= text_field_tag 'part' %>
       </div>
-      <div class="form-section">
+      <div>
         <%= label_tag 'Part Number' %>
         <%= text_field_tag 'part_num' %>
       </div>
-      <div class="form-section">
+      <div>
         <%= label_tag 'Quantity' %>
         <%= text_field_tag 'quantity' %>
       </div>
-      <div class="form-section">
+      <div>
         <%= submit_tag 'Add Item' %>
       </div>
     <% end %>
 
-    <%= form_tag order_path(@order.id), id: 'login-form', method: :put do %>
+    <%= form_tag order_path(@order.id), id: 'create-order-form', method: :put do %>
       <%= hidden_field_tag 'submit', 'true' %>
       <%= submit_tag 'Create Order' %>
     <% end %>
