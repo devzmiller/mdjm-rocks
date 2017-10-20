@@ -1,4 +1,4 @@
-<h1 class="order-form-header">Order No. <%= @order.id %></h1>
+<h2 class="order-form-header">Order No. <%= @order.id %></h2>
 
 <%= link_to "All Orders", orders_path %>
 
@@ -31,6 +31,8 @@
   </div>
 <% end %>
 
+<h3><%= @order.warehouse.name %></h3>
+
 <%= form_tag order_path(@order), method: 'patch' do %>
   <table class="inventory-table">
     <%= hidden_field_tag 'wenis', 'hi' %>
@@ -48,6 +50,7 @@
         <td><%= entry.part.name %></td>
         <td><%= entry.part.part_number %></td>
         <td><%= entry.quantity_ordered %></td>
+
         <% if @order.submitted %>
           <% if @order.received_date %>
             <td><%= entry.quantity_received %></td>

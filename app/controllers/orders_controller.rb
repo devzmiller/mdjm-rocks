@@ -23,7 +23,15 @@ class OrdersController < ApplicationController
       @errors += @part.errors.full_messages
     end
 
-    @order = Order.create(orderer_id: session[:user_id], submitted: false)
+    warehouse = Warehouse.find_by_name(params[:warehouse])
+    if !warehouse
+      puts "****************************************"
+      @errors << "Please check warehouse spelling."
+      render :new
+      return
+    end
+
+    @order = Order.create(orderer_id: session[:user_id], submitted: false, warehouse: warehouse)
     order_part = OrdersPart.create(quantity_ordered: params[:quantity], part: @part, order: @order)
     @errors += @order.errors.full_messages
     @errors += order_part.errors.full_messages
@@ -32,6 +40,7 @@ class OrdersController < ApplicationController
       redirect_to order_path(@order)
     else
       render :new
+      return
     end
   end
 

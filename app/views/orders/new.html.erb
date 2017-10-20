@@ -7,6 +7,10 @@
 <div class="order-form">
   <%= form_tag orders_path, method: :post %>
     <div>
+      <%= label_tag 'Warehouse' %>
+      <%= text_field_tag 'warehouse' %>
+    </div>
+    <div>
       <%= label_tag 'Part Name' %>
       <%= text_field_tag 'part' %>
     </div>
