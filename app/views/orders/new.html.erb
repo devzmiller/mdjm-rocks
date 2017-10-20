@@ -1,0 +1,17 @@
+<div id="login-form-div">
+  <%= form_tag new_order_path, id: 'login-form' do %>
+    <%= render "shared/errors", object: @order_part %>
+    <div class="form-section">
+      <%= label_tag 'Part Name' %>
+      <%= text_field_tag 'part.name' %>
+    </div>
+    <div class="form-section">
+      <%= label_tag 'Quantity' %>
+      <%= text_field_tag 'quantity_ordered' %>
+    </div>
+    <div class="form-section">
+      <%= submit_tag 'Update Order' %>
+      <%= submit_tag 'Create Order' %>
+    </div>
+  <% end %>
+</div>
