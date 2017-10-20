@@ -47,5 +47,11 @@ describe PartsController, type: :controller do
         expect(assigns[:parts]).to eq nonmanager.warehouse.parts.uniq
       end
     end
+    context "when user is not logged in" do
+      it "redirects to new session path" do
+        get :index
+        expect(response).to redirect_to new_session_path
+      end
+    end
   end
 end

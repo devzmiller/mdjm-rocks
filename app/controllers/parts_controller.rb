@@ -1,8 +1,8 @@
 class PartsController < ApplicationController
-  def index    
+  def index
     if session[:user_id] == nil
       redirect_to new_session_path
-    elsif User.find(session[:user_id]).role == 'manager'
+    elsif is_manager?
       if params[:name]
         @warehouse = Warehouse.find_by(name: params[:name])
         if @warehouse == nil
