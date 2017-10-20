@@ -1,4 +1,6 @@
 class WarehousesController < ApplicationController
+  helper UserHelper
+
   def new
     if is_manager?
       @warehouse = Warehouse.new
@@ -26,10 +28,5 @@ class WarehousesController < ApplicationController
 
   def warehouse_params
     params.require(:warehouse).permit(:name)
-  end
-
-  def is_manager?
-    return true if User.find(session[:user_id]).role == "manager"
-    false
   end
 end
