@@ -63,11 +63,11 @@
     text-align: center;
   }
 
-  .emptyItem {
+  .nav-item {
     flex: 1;
     margin-top: 20px;
     a {
-      margin-left: 200px;
+      display: inline-block;
     }
   }
 
