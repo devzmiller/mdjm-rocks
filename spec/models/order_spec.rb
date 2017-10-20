@@ -9,6 +9,7 @@ RSpec.describe Order, type: :model do
       order.submitted = nil
       expect(order).to_not be_valid
     end
+    it { should validate_presence_of(:warehouse) }
   end
   describe "in_shipment?" do
     it "returns whether or not the order has been submitted" do
@@ -20,5 +21,6 @@ RSpec.describe Order, type: :model do
     it { should have_many(:parts) }
     it { should belong_to(:receiver) }
     it { should belong_to(:orderer) }
+    it { should belong_to(:warehouse) }
   end
 end
