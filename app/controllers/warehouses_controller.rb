@@ -1,6 +1,4 @@
 class WarehousesController < ApplicationController
-  helper UserHelper
-
   def new
     if is_manager?
       @warehouse = Warehouse.new

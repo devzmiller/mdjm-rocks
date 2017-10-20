@@ -1,19 +1,27 @@
 class UsersController < ApplicationController
 
   def new
-    @user = User.new
+    if is_manager?
+      @user = User.new
+    else
+      render "shared/404"
+    end
   end
 
   def create
-    @user = User.new(user_params)
-    @user.role = params.permit(:role)
-    @warehouse = Warehouse.find_by(name: warehouse_params)
-    @user.warehouse = @warehouse
-    if @user.save
-      redirect_to parts_path
+    if is_manager?
+      @user = User.new(user_params)
+      @user.role = params.permit(:role)
+      @warehouse = Warehouse.find_by(name: warehouse_params)
+      @user.warehouse = @warehouse
+      if @user.save
+        redirect_to parts_path
+      else
+        @errors = @user.errors.full_messages
+        render :new
+      end
     else
-      @errors = @user.errors.full_messages
-      render :new
+      render "shared/404"
     end
   end
 
