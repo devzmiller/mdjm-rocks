@@ -11,7 +11,11 @@
   <% @orders.each do |order| %>
     <tr>
       <td><%= link_to order.id, order_path(Order.find(order.id))  %></td>
-      <td><%= order.received_date %></td>
+      <% if order.received_date %>
+        <td><%= order.received_date %></td>
+      <% else %>
+        <td>Not Received</td>
+      <% end %>
       <td><%= order.in_shipment? %></td>
     </tr>
   <% end %>
