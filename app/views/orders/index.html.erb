@@ -13,7 +13,7 @@
   </tr>
   <% @orders.each do |order| %>
     <tr>
-      <td><%= link_to order.id, order_path(Order.find(order.id))  %></td>
+      <td><%= link_to order.id, order_path(order) %></td>
       <% if order.received_date %>
         <td><%= order.received_date %></td>
       <% else %>

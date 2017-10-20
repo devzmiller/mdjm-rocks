@@ -1,26 +1,36 @@
+@import 'colors';
+
 .order-form-header {
   text-align: center;
 }
 
-.order-form {
-  margin-top: 20px;
+.order-container {
   text-align: center;
+}
+
+.order-form {
+  background: $light_gray;
+  padding: 20px 50px 20px 50px;
+  margin-top: 20px;
+  border-radius: 30px;
+  width: 285px;
+  display: inline-block;
   form {
-    display: inline-block;
+    width: 100%;
     div {
       float: right;
       clear: both;
       margin-bottom: 5px;
     }
     input[type=submit] {
-      width: 250px;
+      width: 285px;
     }
   }
   #create-order-form {
     display: block;
-    margin-bottom: 20px;
+    text-align: center;
     input {
-      width: 250px;
+      width: 285px;
     }
   }
 }

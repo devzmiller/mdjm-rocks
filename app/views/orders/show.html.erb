@@ -5,29 +5,31 @@
 <%= render 'shared/errors' %>
 
 <% if !@order.submitted %>
-  <div class="order-form">
-    <%= form_tag order_path(@order.id), method: :put do %>
-      <div>
-        <%= label_tag 'Part Name' %>
-        <%= text_field_tag 'part' %>
-      </div>
-      <div>
-        <%= label_tag 'Part Number' %>
-        <%= text_field_tag 'part_num' %>
-      </div>
-      <div>
-        <%= label_tag 'Quantity' %>
-        <%= text_field_tag 'quantity' %>
-      </div>
-      <div>
-        <%= submit_tag 'Add Item' %>
-      </div>
-    <% end %>
+  <div class="order-container">
+    <div class="order-form">
+      <%= form_tag order_path(@order.id), method: :put do %>
+        <div>
+          <%= label_tag 'Part Name' %>
+          <%= text_field_tag 'part' %>
+        </div>
+        <div>
+          <%= label_tag 'Part Number' %>
+          <%= text_field_tag 'part_num' %>
+        </div>
+        <div>
+          <%= label_tag 'Quantity' %>
+          <%= text_field_tag 'quantity' %>
+        </div>
+        <div>
+          <%= submit_tag 'Add Item' %>
+        </div>
+      <% end %>
 
-    <%= form_tag order_path(@order.id), id: 'create-order-form', method: :put do %>
-      <%= hidden_field_tag 'submit', 'true' %>
-      <%= submit_tag 'Create Order' %>
-    <% end %>
+      <%= form_tag order_path(@order.id), id: 'create-order-form', method: :put do %>
+        <%= hidden_field_tag 'submit', 'true' %>
+        <%= submit_tag 'Create Order' %>
+      <% end %>
+    </div>
   </div>
 <% end %>
 
