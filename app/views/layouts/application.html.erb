@@ -18,6 +18,11 @@
         <% end %>
       <% end %>
     </div>
-    <%= yield %>
+
+    <% if session[:user_id] %>
+      <%= yield %>
+    <% else %>
+      <%= render 'sessions/new' %>
+    <% end %>
   </body>
 </html>

@@ -22,7 +22,11 @@
       <h2 class="inventory-header">Inventory</h2>
     </div>
 
-    <div class="emptyItem"><%= link_to "Add Warehouse", new_warehouse_path, class: "new-warehouse-button" %></div>
+    <div class="emptyItem">
+      <% if User.find(session[:user_id]).role == "manager" %>
+      <%= link_to "Add Warehouse", new_warehouse_path, class: "new-warehouse-button" %>
+      <% end %>
+    </div>
 
   <% else %>
     <div class="smallItem">
@@ -34,7 +38,9 @@
     </div>
 
     <div class="emptyItem">
+      <% if User.find(session[:user_id]).role == "manager" %>
       <%= link_to "Add Warehouse", new_warehouse_path, class: "new-warehouse-button" %>
+      <% end %>
     </div>
   <% end %>
 </div>

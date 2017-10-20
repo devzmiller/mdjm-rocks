@@ -1,15 +1,20 @@
 class PartsController < ApplicationController
   def index
-    if params[:name]
-      @warehouse = Warehouse.find_by(name: params[:name])
-      if @warehouse == nil
-        @errors = ["Warehouse doesn't exist"]
-        @parts = Part.all
+    if User.find(session[:user_id]).role == 'manager'
+      if params[:name]
+        @warehouse = Warehouse.find_by(name: params[:name])
+        if @warehouse == nil
+          @errors = ["Warehouse doesn't exist"]
+          @parts = Part.all
+        else
+          @parts = @warehouse.parts.uniq
+        end
       else
-        @parts = @warehouse.parts.uniq
+        @parts = Part.all
       end
     else
-      @parts = Part.all
+      @warehouse = User.find(session[:user_id]).warehouse
+      @parts = @warehouse.parts.uniq
     end
   end
 end

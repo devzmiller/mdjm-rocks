@@ -12,7 +12,7 @@
 # the additional setup, and require it from the spec files that actually need
 # it.
 require 'simplecov'
-require 'factory_girl'
+require 'factory_girl_rails'
 SimpleCov.start 'rails' do
   add_filter "application"
 end

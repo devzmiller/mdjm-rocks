@@ -50,6 +50,7 @@ ActiveRecord::Schema.define(version: 20171019224625) do
     t.string "role", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "warehouse_id"
   end
 
   create_table "warehouses", force: :cascade do |t|
@@ -67,4 +68,5 @@ ActiveRecord::Schema.define(version: 20171019224625) do
     t.index ["warehouse_id"], name: "index_warehouses_parts_on_warehouse_id"
   end
 
+  add_foreign_key "users", "warehouses"
 end

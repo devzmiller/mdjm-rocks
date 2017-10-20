@@ -44,7 +44,7 @@ group :test do
   gem 'capybara'
   gem 'poltergeist'
 
-  gem 'factory_girl_rails'
+  gem 'factory_girl_rails', :require => false
   gem 'database_cleaner'
 end
 

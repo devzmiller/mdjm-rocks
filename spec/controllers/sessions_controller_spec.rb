@@ -19,6 +19,7 @@ describe SessionsController, type: :controller do
         expect(session[:user_id]).to eq(user.id)
       end
     end
+
     context "when login is unsuccessful" do
       before(:each) { post :create, params: {employee_num: user.employee_num, password: 'jazzword'} }
       it "assign an errors instance variable" do
@@ -29,6 +30,19 @@ describe SessionsController, type: :controller do
       end
       it "renders :new" do
         expect(response).to render_template(:new)
+      end
+
+      context "when user inputs invalid password" do
+        it "assign an errors instance variable" do
+          expect(assigns[:errors]).to include('Invalid password')
+        end
+      end
+
+      context "when user does not exist" do
+        before(:each) { post :create, params: {employee_num: 56789, password: 'jazzword'} }
+        it 'assigns a specific error to an errors instance variable' do
+          expect(assigns[:errors]).to include "Employee doesn't exist"
+        end
       end
     end
   end

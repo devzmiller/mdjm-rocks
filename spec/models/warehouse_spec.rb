@@ -17,7 +17,9 @@ RSpec.describe Warehouse, type: :model do
 
     it "has many parts" do
       warehouse_example.parts << part_example
-      expect(warehouse_example.parts).to include part_example 
+      expect(warehouse_example.parts).to include part_example
     end
+
+    # it { should have_many(:users) }
   end
 end
