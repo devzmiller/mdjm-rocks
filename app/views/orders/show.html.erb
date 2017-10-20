@@ -2,8 +2,7 @@
 
 <% if !@order.submitted %>
   <div id="login-form-div">
-    <%= form_tag order_path(@order.id), id: 'login-form', method: :put %>
-      <%= hidden_field_tag 'submit', 'false' %>
+    <%= form_tag order_path(@order.id), id: 'login-form', method: :put do %>
       <div class="form-section">
         <%= label_tag 'Part Name' %>
         <%= text_field_tag 'part' %>
@@ -17,11 +16,14 @@
         <%= text_field_tag 'quantity' %>
       </div>
       <div class="form-section">
-        <%= submit_tag 'Add Another Item' %>
+        <%= submit_tag 'Add Item' %>
       </div>
-    <%= form_tag order_path(@order.id), id: 'login-form', method: :put %>
+    <% end %>
+
+    <%= form_tag order_path(@order.id), id: 'login-form', method: :put do %>
       <%= hidden_field_tag 'submit', 'true' %>
       <%= submit_tag 'Create Order' %>
+    <% end %>
   </div>
 <% end %>
 
