@@ -13,6 +13,7 @@ describe User do
     end
     it 'must have a unique employee number' do
       new_employee = build(:user)
+      new_employee.employee_num = user.employee_num
       expect(new_employee).to_not be_valid
     end
     it 'must have a password' do

@@ -1,0 +1,24 @@
+<h1 class="order-form-header">Create a New Order</h1>
+
+<%= link_to "All Orders", orders_path %>
+
+<%= render 'shared/errors' %>
+
+<div class="order-form">
+  <%= form_tag orders_path, method: :post %>
+    <div>
+      <%= label_tag 'Part Name' %>
+      <%= text_field_tag 'part' %>
+    </div>
+    <div>
+      <%= label_tag 'Part Number' %>
+      <%= text_field_tag 'part_num' %>
+    </div>
+    <div>
+      <%= label_tag 'Quantity' %>
+      <%= text_field_tag 'quantity' %>
+    </div>
+    <div>
+      <%= submit_tag 'Add Item' %>
+    </div>
+</div>

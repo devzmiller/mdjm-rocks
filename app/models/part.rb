@@ -1,7 +1,10 @@
 class Part < ApplicationRecord
-  validates :part_number, :name, :max_quantity, presence: true
+  has_many :orders_parts
+  has_many :orders, through: :orders_parts
   has_many :warehouses_parts
   has_many :warehouses, through: :warehouses_parts
+
+  validates :part_number, :name, :max_quantity, presence: true
 
   def self.overall_total(part)
     WarehousesPart.where(part_id: part.id).count

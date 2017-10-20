@@ -33,6 +33,9 @@ RSpec.describe Part, type: :model do
       part_example.warehouses << warehouse1
       expect(part_example.warehouses).to include warehouse1
     end
+
+    it { should have_many(:orders) }
+    it { should have_many(:orders_parts) }
   end
 
   describe '.overall_total' do

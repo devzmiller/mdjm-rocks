@@ -15,6 +15,26 @@ ActiveRecord::Schema.define(version: 20171020014323) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
+  create_table "orders", force: :cascade do |t|
+    t.integer "orderer_id"
+    t.integer "receiver_id"
+    t.datetime "received_date"
+    t.boolean "submitted"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "orders_parts", force: :cascade do |t|
+    t.integer "quantity_ordered"
+    t.integer "quantity_received"
+    t.bigint "part_id"
+    t.bigint "order_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["order_id"], name: "index_orders_parts_on_order_id"
+    t.index ["part_id"], name: "index_orders_parts_on_part_id"
+  end
+
   create_table "parts", force: :cascade do |t|
     t.integer "part_number", null: false
     t.string "name", null: false

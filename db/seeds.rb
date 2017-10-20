@@ -1,14 +1,10 @@
-# This file should contain all the record creation needed to seed the database with its default values.
-# The data can then be loaded with the rails db:seed command (or created alongside the database with db:setup).
-#
-# Examples:
-#
-#   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
-#   Character.create(name: 'Luke', movie: movies.first)
+require 'date'
+
+ warehouses = []
 
 10.times do
   Part.create(part_number: Faker::Number.number(5), name: Faker::Pokemon.move, max_quantity: 50)
-  Warehouse.create(name: Faker::Address.city)
+  warehouses << Warehouse.create(name: Faker::Address.city)
 end
 
 3.times do
@@ -16,3 +12,14 @@ end
   warehouse = Warehouse.find 1
   warehouse.parts << part
 end
+
+3.times do
+  user = User.create!(name: 'Jo Schmo', employee_num: Random.rand(500), password: 'cher', role: 'manager', warehouse: warehouses.sample)
+  order = Order.create!(orderer: user, received_date: DateTime.now + 5, submitted: true)
+  30.times do
+    part = Part.create(part_number: Faker::Number.number(5), name: Faker::Pokemon.move, max_quantity: 50)
+    OrdersPart.create(order: order, part: part, quantity_ordered: 13, quantity_received: 13)
+  end
+end
+
+User.create!(employee_num: 123, password: 'a', warehouse: warehouses.sample, name: "a", role: "manager")
