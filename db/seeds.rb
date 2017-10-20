@@ -23,3 +23,5 @@ end
 end
 
 User.create!(employee_num: 123, password: 'a', warehouse: warehouses.sample, name: "a", role: "manager")
+
+User.create!(employee_num: 1, password: '1', warehouse: warehouses.sample, name: "1", role: "scientist")

@@ -1,6 +1,8 @@
 <h1>Orders</h1>
 
-<%= link_to "Make a New Order", new_order_path %>
+<% if User.find(session[:user_id]).role == 'manager' %>
+  <%= link_to "Make a New Order", new_order_path %>
+<% end %>
 
 <table class="inventory-table">
   <tr>
