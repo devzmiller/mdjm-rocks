@@ -21,6 +21,12 @@ describe UsersController, type: :controller do
       it 'redirects to parts_path' do
         expect(response).to redirect_to parts_path
       end
+      it 'adds a new user' do
+        expect(User.find_by(employee_num: 777)).to_not be nil
+      end
+      it 'assigns a warehouse variable' do
+        expect(assigns[:warehouse]).to eq Warehouse.find_by(name: "Seattle")
+      end
     end
 
     context 'unsuccessful user creation' do
