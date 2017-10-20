@@ -94,7 +94,8 @@ RSpec.describe OrdersController, type: :controller do
       it "adds an error to @errors if part name and number don't match" do
         put :update, params: {id: order.id, part_num: part.part_number, part: "wenis", quantity: 10},
                                     session: {user_id: user.id}
-        expect(assigns[:errors]).to include("Part name is invalid")
+        all_errors = assigns[:errors].join(", ")
+        expect(all_errors).to include("Use correct part name/number")
       end
     end
 

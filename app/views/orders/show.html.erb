@@ -49,7 +49,7 @@
       <td><%= entry.quantity_ordered %></td>
       <% if @order.submitted %>
         <td><%= entry.quantity_received || 0 %></td>
-        <td><%= (entry.quantity_received || 0) - entry.quantity_ordered %></td>
+        <td><%= entry.discrepancy %></td>
       <% end %>
     </tr>
   <% end %>
