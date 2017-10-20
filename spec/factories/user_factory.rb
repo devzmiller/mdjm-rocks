@@ -5,4 +5,9 @@ FactoryGirl.define do
     password "password"
     role "manager"
   end
+  factory :order do
+    submitted true
+    # orderer FactoryGirl.create(:user)
+    # receiver FactoryGirl.create(:user)
+  end
 end
