@@ -75,12 +75,25 @@ RSpec.describe OrdersController, type: :controller do
     let (:order) { create :order }
     let(:part) { create :part }
 
-    context "valid input" do
-      before(:each) { put :update, params: {id: order.id, part_num: part.part_number, part: part.name, quantity: 10},
-                                  session: {user_id: user.id}}
-
+    context "valid form input" do
       it "redirects back to order show page" do
+        put :update, params: {id: order.id, part_num: part.part_number, part: part.name, quantity: 10},
+                                    session: {user_id: user.id}
         expect(response).to redirect_to(order_path(order))
+      end
+
+      it "creates a new part in the database if part doesn't already exist" do
+        put :update, params: {id: order.id, part_num: 786, part: "Rocket Launcher", quantity: 10},
+                                    session: {user_id: user.id}
+        expect(Part.last.name).to eq("Rocket Launcher")
+      end
+    end
+
+    context "invalid form input" do
+      it "adds an error to @errors if part name and number don't match" do
+        put :update, params: {id: order.id, part_num: part.part_number, part: "wenis", quantity: 10},
+                                    session: {user_id: user.id}
+        expect(assigns[:errors]).to include("Part name is invalid")
       end
     end
 
@@ -91,6 +104,5 @@ RSpec.describe OrdersController, type: :controller do
         expect(Order.find(order.id).submitted).to eq true
       end
     end
-
   end
 end
