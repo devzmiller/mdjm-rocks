@@ -32,6 +32,10 @@ describe UsersController, type: :controller do
         post :create, params: {user: { name: "Reginald", employee_num: user.employee_num, password: "ham", warehouse: "Seattle"}, role: "scientist"}
         expect(assigns[:errors]).to include "Employee num has already been taken"
       end
+      it 'renders new form' do
+        post :create, params: {user: { name: "Reginald", employee_num: user.employee_num, password: "ham", warehouse: "Seattle"}, role: "scientist"}
+        expect(response).to render_template :new
+      end
     end
   end
 
