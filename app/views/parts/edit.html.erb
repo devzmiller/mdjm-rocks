@@ -1,0 +1,23 @@
+<h2 class="main-header"><%= @part.name %></h2>
+
+<div class="edit-part-form">
+  <%= form_for @part do |f| %>
+    <div class="form-section">
+      <%= f.label "Part Number - #{@part.part_number}" %>
+    </div>
+    <div class="form-section">
+      <%= f.text_field :part_number %>
+    </div>
+
+    <div class="form-section">
+      <%= f.label "Max Quantity - #{@part.max_quantity}"  %>
+    </div>
+    <div class="form-section">
+      <%= f.text_field :max_quantity %>
+    </div>
+
+    <div class="form-section">
+      <%= f.submit "Edit!" %>
+    </div>
+  <% end %>
+</div>

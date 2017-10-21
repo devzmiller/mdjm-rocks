@@ -26,9 +26,13 @@
   }
 
   tr {
+    height: 35px;
     border: medium black solid;
     &:nth-child(odd) {
       background: $gray;
+    }
+    a:link {
+      text-decoration: none;
     }
   }
 
