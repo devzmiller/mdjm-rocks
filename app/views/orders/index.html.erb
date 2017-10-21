@@ -19,7 +19,11 @@
       <% else %>
         <td>Not Received</td>
       <% end %>
-      <td><%= order.in_shipment? %></td>
+      <% if order.in_shipment? %>
+        <td class="check">&#10003;</td>
+      <% else %>
+        <td class="x">X</td>
+      <% end %>
       <td><%= order.warehouse.name %></td>
     </tr>
   <% end %>

@@ -19,10 +19,27 @@
   width: 135px;
 }
 
+.check {
+  color: green;
+}
+
+.x {
+  color: red;
+}
+
+#order-index-link {
+  margin-left: 54%;
+}
+
+#order-show-link {
+  margin-left: 10%;
+}
+
 .order-form {
   background: $light_gray;
   padding: 20px 50px 20px 50px;
   margin-top: 20px;
+  margin-bottom: 20px;
   border-radius: 30px;
   width: 285px;
   display: inline-block;
