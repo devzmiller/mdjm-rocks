@@ -3,6 +3,7 @@ require 'rails_helper'
 describe PartsController, type: :controller do
   let!(:warehouse) {create(:warehouse)}
   let!(:part) {create(:part)}
+
   describe "parts#index" do
     context "when user is a manager" do
       let!(:user) {create(:user)}
@@ -52,6 +53,17 @@ describe PartsController, type: :controller do
         get :index
         expect(response).to redirect_to new_session_path
       end
+    end
+  end
+
+  describe "#edit" do
+    before(:each) { get :edit, params: {id: part.id} }
+    it "assigns @part to current part" do
+      expect(assigns[:part]).to eq(part)
+    end
+
+    it "renders :edit" do
+      expect(response).to render_template(:edit)
     end
   end
 end
