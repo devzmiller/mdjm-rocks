@@ -1,0 +1,7 @@
+<h2><%= @warehouse.name %></h2>
+<h3><%= @part.name %></h3>
+<%= form_tag warehouse_parts_path, method: :destroy do %>
+  <%= label_tag "Quantity Used:"%>
+  <%= text_field_tag(:quantity) %>
+  <%= submit_tag "Use Parts" %>
+<% end %>

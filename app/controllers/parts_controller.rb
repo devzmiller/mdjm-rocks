@@ -19,4 +19,9 @@ class PartsController < ApplicationController
       @parts = @warehouse.parts.uniq
     end
   end
+
+  def edit
+    @warehouse = Warehouse.find(params[:warehouse_id])
+    @part = Part.find(params[:id])
+  end
 end

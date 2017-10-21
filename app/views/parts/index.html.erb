@@ -4,19 +4,21 @@
   <tr>
     <th>Part Name</th>
     <th>Part Number</th>
-    <th>Quantity</th>
     <th>Max Quantity</th>
+    <th>Quantity</th>
+    <th>Use Part</th>
   </tr>
   <% @parts.each do |part| %>
     <tr>
       <td class="col-1"><%= part.name %></td>
       <td><%= part.part_number %></td>
+      <td><%= part.max_quantity %></td>
       <% if @warehouse %>
         <td><%= Part.warehouse_total(@warehouse, part) %></td>
+        <td> <%= link_to 'Use a Part', edit_warehouse_part_path(part, @warehouse) %> </td>
       <% else %>
         <td><%= Part.overall_total(part) %></td>
       <% end %>
-      <td><%= part.max_quantity %></td>
     </tr>
   <% end %>
 </table>

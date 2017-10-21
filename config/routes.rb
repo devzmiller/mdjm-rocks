@@ -4,9 +4,9 @@ Rails.application.routes.draw do
   resources :parts, only: [:index]
   resources :users, only: [:new, :create]
   resources :warehouses, only: [:new, :create] do
-    resources :parts, only: [:index]
+    resources :parts, only: [:index, :edit, :destroy]
   end
 
   resources :orders, only: [:index, :create, :new, :show, :update]
-  
+
 end
