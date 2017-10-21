@@ -12,15 +12,17 @@ class PartsController < ApplicationController
           @parts = Part.all
         else
           @parts = @warehouse.parts.uniq
+          @parts = @parts.sort { |a, b| a.name.downcase <=> b.name.downcase }
         end
 
       else
-        @parts = Part.all
+        @parts = Part.all.sort { |a, b| a.name.downcase <=> b.name.downcase }
       end
 
     else
       @warehouse = User.find(session[:user_id]).warehouse
       @parts = @warehouse.parts.uniq
+      @parts = @parts.sort { |a, b| a.name.downcase <=> b.name.downcase }
     end
   end
 
