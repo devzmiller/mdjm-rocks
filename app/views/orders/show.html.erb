@@ -1,6 +1,8 @@
 <h2 class="order-form-header">Order No. <%= @order.id %></h2>
 
-<%= link_to "All Orders", orders_path %>
+<%= link_to "All Orders", orders_path, id: 'order-show-link', class: 'nav-button' %>
+
+<h3 class="main-header"><%= @order.warehouse.name %></h3>
 
 <%= render 'shared/errors' %>
 
@@ -33,7 +35,6 @@
   </div>
 <% end %>
 
-<h3><%= @order.warehouse.name %></h3>
 
 <%= form_tag order_path(@order), method: 'patch' do %>
   <table class="inventory-table">
@@ -66,6 +67,6 @@
   </table>
 
   <% if @order.submitted && !@order.received_date %>
-    <%= submit_tag "Finalize Order" %>
+    <%= submit_tag "Finalize Order", id: 'finalize-order' %>
   <% end %>
 <% end %>

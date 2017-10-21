@@ -62,8 +62,10 @@
 
   .smallItem {
     flex: 1;
+    flex-direction: row;
     align-items: flex-start;
     form {
+      float: right;
       margin-top: 20px;
       margin-left: 20px;
     }
