@@ -75,8 +75,8 @@ describe PartsController, type: :controller do
         expect(Part.find(change_part.id).max_quantity).to eq(10)
       end
 
-      it "redirects to edit route" do
-        expect(response).to redirect_to(edit_part_path(change_part))
+      it "redirects to parts#index route" do
+        expect(response).to redirect_to(parts_path)
       end
 
       it "doesn't populate @errors" do

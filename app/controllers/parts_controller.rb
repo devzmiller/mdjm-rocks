@@ -35,7 +35,7 @@ class PartsController < ApplicationController
     @part.assign_attributes(part_params)
 
     if @part.save
-      redirect_to edit_part_path(@part)
+      redirect_to parts_path
     else
       @errors = @part.errors.full_messages
       render :edit
