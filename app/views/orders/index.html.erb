@@ -17,7 +17,7 @@
       <% if order.received_date %>
         <td><%= order.received_date %></td>
       <% else %>
-        <td>Not Received</td>
+        <td class="x">Not Received</td>
       <% end %>
       <% if order.in_shipment? %>
         <td class="check">&#10003;</td>

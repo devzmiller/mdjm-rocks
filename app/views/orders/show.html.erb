@@ -67,6 +67,6 @@
   </table>
 
   <% if @order.submitted && !@order.received_date %>
-    <%= submit_tag "Finalize Order" %>
+    <%= submit_tag "Finalize Order", id: 'finalize-order' %>
   <% end %>
 <% end %>
