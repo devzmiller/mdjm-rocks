@@ -1,4 +1,6 @@
-#new-user-form {
+@import 'colors';
+
+#new-user-form-container {
   margin: auto;
   width: 30%;
   h2 {
@@ -9,4 +11,10 @@
     padding-top: 30px;
     float: right;
   }
+}
+
+#new-user-form {
+  border-radius: 30px;
+  padding: 20px 0px 20px 0px;
+  background: $light_gray;
 }

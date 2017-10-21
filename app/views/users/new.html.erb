@@ -1,30 +1,46 @@
-<div id="new-user-form">
+<div id="new-user-form-container">
   <h2>Add New User</h2>
-  <%= form_for @user do |f| %>
+  <%= form_for @user, html: {id: 'new-user-form'} do |f| %>
     <div class="form-section">
       <%= f.label "Name: " %>
+    </div>
+    <div class="form-section">
       <%= f.text_field :name, required: true %>
     </div>
+
     <div class="form-section">
       <%= f.label "Employee Number: " %>
-      <%= f.text_field :employee_num, required: true %>
     </div>
     <div class="form-section">
+      <%= f.text_field :employee_num, required: true %>
+    </div>
+
+    <div class="form-section">
       <%= f.label "Password: " %>
+    </div>
+    <div class="form-section">
       <%= f.password_field :password, required: true %>
+    </div>
+
+    <div class="form-section">
+      <%= f.label "Warehouse: " %>
+    </div>
+    <div class="form-section">
+      <%= f.text_field :warehouse, required: true, value: "" %>
     </div>
     <div class="form-section">
       <%= radio_button_tag(:role, "manager", required: true) %>
       <%= label_tag(:role_manager, "Manager") %>
+    </div>
+    <div class="form-section">
       <%= radio_button_tag(:role, "scientist", required: true) %>
       <%= label_tag(:role_scientist, "Scientist") %>
+    </div>
+    <div class="form-section">
       <%= radio_button_tag(:role, "warehouse", required: true) %>
       <%= label_tag(:role_warehouse, "Warehouse") %>
     </div>
-    <div class="form-section">
-      <%= f.label "Warehouse: " %>
-      <%= f.text_field :warehouse, required: true, value: "" %>
-    </div>
+
     <div class="form-section">
       <%= f.submit "Create New Employee" %>
     </div>
