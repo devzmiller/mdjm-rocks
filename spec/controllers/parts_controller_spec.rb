@@ -66,4 +66,30 @@ describe PartsController, type: :controller do
       expect(response).to render_template(:edit)
     end
   end
+
+  describe "#update" do
+    context "valid input" do
+      let(:change_part) { create(:part, max_quantity: 20) }
+      before(:each) { put :update, params: {id: change_part.id, part: { part_number: change_part.part_number, max_quantity: 10 }}}
+      it "updates attributes for a specific part" do
+        expect(Part.find(change_part.id).max_quantity).to eq(10)
+      end
+
+      it "redirects to edit route" do
+        expect(response).to redirect_to(edit_part_path(change_part))
+      end
+
+      it "doesn't populate @errors" do
+        expect(assigns[:errors]).to eq(nil)
+      end
+    end
+
+    context 'invalid input' do
+      it 'populates @errors' do
+        bad_part = create(:part)
+        put :update, params: {id: bad_part.id, part: { part_number: "", max_quantity: 10 }}
+        expect(assigns[:errors].length).to_not eq(0)
+      end
+    end
+  end
 end
