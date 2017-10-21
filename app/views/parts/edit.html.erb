@@ -1,6 +1,6 @@
 <h2 class="main-header"><%= @part.name %></h2>
 
-<div class="edit-part-form">
+<div id="edit-part-form">
   <%= form_for @part do |f| %>
     <div class="form-section">
       <%= f.label "Part Number - #{@part.part_number}" %>

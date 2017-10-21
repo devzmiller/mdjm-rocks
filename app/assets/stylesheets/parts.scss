@@ -7,6 +7,17 @@
   }
 }
 
+#edit-part-form  {
+  text-align: center;
+  form {
+    display: inline-block;
+    margin: auto;
+    background: $light_gray;
+    border-radius: 30px;
+    padding: 20px;
+  }
+}
+
 #warehouse-search {
   form {
     display: inline-block;
