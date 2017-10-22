@@ -6,6 +6,7 @@
     <th>Part Number</th>
     <th>Quantity</th>
     <th>Max Quantity</th>
+    <th>EDIT</th>
   </tr>
   <% @parts.each do |part| %>
     <tr>
@@ -17,6 +18,7 @@
         <td><%= Part.overall_total(part) %></td>
       <% end %>
       <td><%= part.max_quantity %></td>
+      <td><%= link_to "📝", edit_part_path(part) %></td>
     </tr>
   <% end %>
 </table>

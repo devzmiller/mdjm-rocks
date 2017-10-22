@@ -7,6 +7,17 @@
   }
 }
 
+#edit-part-form  {
+  text-align: center;
+  form {
+    display: inline-block;
+    margin: auto;
+    background: $light_gray;
+    border-radius: 30px;
+    padding: 20px;
+  }
+}
+
 #warehouse-search {
   form {
     display: inline-block;
@@ -26,9 +37,13 @@
   }
 
   tr {
+    height: 35px;
     border: medium black solid;
     &:nth-child(odd) {
       background: $gray;
+    }
+    a:link {
+      text-decoration: none;
     }
   }
 
@@ -41,18 +56,20 @@
   }
 }
 
+.inventory-header {
+  text-align: center;
+}
+
 .flex-container {
   display: flex;
   flex-direction: row;
 
-  .smallItem {
+  .left {
     flex: 1;
     flex-direction: row;
-    align-items: flex-start;
     form {
-      float: right;
       margin-top: 20px;
-      margin-left: 20px;
+      margin-left: 20%;
     }
     .warehouse-name {
       display: inline-block;
@@ -60,21 +77,15 @@
     }
   }
 
-  .bigItem {
-    flex: 1;
-    text-align: center;
-  }
-
-  .nav-item {
+  .right {
     flex: 1;
     margin-top: 20px;
     a {
+      float: right;
       display: inline-block;
     }
-  }
-
-  .inventory-header {
-    text-align: center;
-    display: inline-block;
+    .last {
+      margin-right:20%;
+    }
   }
 }

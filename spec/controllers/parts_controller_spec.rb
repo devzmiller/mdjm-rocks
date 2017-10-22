@@ -3,6 +3,7 @@ require 'rails_helper'
 describe PartsController, type: :controller do
   let!(:warehouse) {create(:warehouse)}
   let!(:part) {create(:part)}
+
   describe "parts#index" do
     context "when user is a manager" do
       let!(:user) {create(:user)}
@@ -51,6 +52,43 @@ describe PartsController, type: :controller do
       it "redirects to new session path" do
         get :index
         expect(response).to redirect_to new_session_path
+      end
+    end
+  end
+
+  describe "#edit" do
+    before(:each) { get :edit, params: {id: part.id} }
+    it "assigns @part to current part" do
+      expect(assigns[:part]).to eq(part)
+    end
+
+    it "renders :edit" do
+      expect(response).to render_template(:edit)
+    end
+  end
+
+  describe "#update" do
+    context "valid input" do
+      let(:change_part) { create(:part, max_quantity: 20) }
+      before(:each) { put :update, params: {id: change_part.id, part: { part_number: change_part.part_number, max_quantity: 10 }}}
+      it "updates attributes for a specific part" do
+        expect(Part.find(change_part.id).max_quantity).to eq(10)
+      end
+
+      it "redirects to parts#index route" do
+        expect(response).to redirect_to(parts_path)
+      end
+
+      it "doesn't populate @errors" do
+        expect(assigns[:errors]).to eq(nil)
+      end
+    end
+
+    context 'invalid input' do
+      it 'populates @errors' do
+        bad_part = create(:part)
+        put :update, params: {id: bad_part.id, part: { part_number: "", max_quantity: 10 }}
+        expect(assigns[:errors].length).to_not eq(0)
       end
     end
   end
