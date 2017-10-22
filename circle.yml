@@ -1,5 +1,5 @@
 deployment:
   staging:
-    branch: heroku-ci
+    branch: master
     heroku:
       appname: mdjm-rocks
