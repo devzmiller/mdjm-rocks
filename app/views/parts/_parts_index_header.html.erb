@@ -1,8 +1,10 @@
+<h2 class="inventory-header">Inventory</h2>
+
 <div class="flex-container">
 
   <% if !@warehouse %>
 
-    <div class="smallItem">
+    <div class="left">
 
       <div id="warehouse-search">
         <%= form_tag parts_path, method: :get do %>
@@ -18,30 +20,22 @@
       </div>
     </div>
 
-    <div class="bigItem">
-      <h2 class="inventory-header">Inventory</h2>
-    </div>
-
-    <div class="nav-item">
+    <div class="right">
       <% if User.find(session[:user_id]).role == "manager" %>
-      <%= link_to "Add Warehouse", new_warehouse_path, class: "nav-button" %>
+      <%= link_to "Add Warehouse", new_warehouse_path, class: "last nav-button" %>
       <%= link_to "Add New Employee", new_user_path, class: "nav-button" %>
       <% end %>
       <%= link_to "See All Orders", orders_path, class: "nav-button" %>
     </div>
 
   <% else %>
-    <div class="smallItem">
+    <div class="left">
       <h3 class="warehouse-name"> <%= @warehouse.name %> </h3>
     </div>
 
-    <div class="bigItem">
-      <h2 class="inventory-header">Inventory</h2>
-    </div>
-
-    <div class="nav-item">
+    <div class="right">
       <% if User.find(session[:user_id]).role == "manager" %>
-      <%= link_to "Add Warehouse", new_warehouse_path, class: "nav-button" %>
+      <%= link_to "Add Warehouse", new_warehouse_path, class: "last nav-button" %>
       <%= link_to "Add New Employee", new_user_path, class: "nav-button" %>
       <% end %>
       <%= link_to "See All Orders", orders_path, class: "nav-button" %>
