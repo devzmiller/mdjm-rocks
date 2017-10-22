@@ -1,0 +1,5 @@
+class WarehousePartsController < ApplicationController
+
+  
+
+end

@@ -15,7 +15,7 @@
       <td><%= part.max_quantity %></td>
       <% if @warehouse %>
         <td><%= Part.warehouse_total(@warehouse, part) %></td>
-        <td> <%= link_to 'Use a Part', edit_warehouse_part_path(part, @warehouse) %> </td>
+        <td> <%= link_to 'Use a Part', edit_warehouse_part_path(@warehouse, part) %> </td>
       <% else %>
         <td><%= Part.overall_total(part) %></td>
       <% end %>
