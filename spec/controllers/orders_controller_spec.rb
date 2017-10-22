@@ -42,6 +42,12 @@ RSpec.describe OrdersController, type: :controller do
         order = assigns[:order]
         expect(Order.find(order.id).parts).to include(part)
       end
+
+      it 'redirects to order-path' do
+        order = assigns[:order]
+        errors = assigns[:errors]
+        expect(response).to redirect_to(order_path(order))
+      end
     end
     context "invalid input" do
       it "renders :new template when existing part number doesn't match part name" do
