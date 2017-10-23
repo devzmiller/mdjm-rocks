@@ -7,6 +7,9 @@
     <th>Quantity</th>
     <th>Max Quantity</th>
     <th>EDIT</th>
+    <% if @warehouse %>
+      <th>Use Parts</th>
+    <% end %>
   </tr>
   <% @parts.each do |part| %>
     <tr>
@@ -19,6 +22,9 @@
       <% end %>
       <td><%= part.max_quantity %></td>
       <td><%= link_to "📝", edit_part_path(part) %></td>
+      <% if @warehouse %>
+        <td>Use Parts</td>
+      <% end %>
     </tr>
   <% end %>
 </table>
