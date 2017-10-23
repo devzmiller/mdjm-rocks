@@ -23,7 +23,7 @@
       <td><%= part.max_quantity %></td>
       <td><%= link_to "📝", edit_part_path(part) %></td>
       <% if @warehouse %>
-        <td>Use Parts</td>
+        <td><%= link_to "Use Parts", use_warehouse_part_path(@warehouse, part) %></td>
       <% end %>
     </tr>
   <% end %>

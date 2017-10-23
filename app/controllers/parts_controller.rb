@@ -42,6 +42,19 @@ class PartsController < ApplicationController
     end
   end
 
+  def destroy
+    @warehouse = Warehouse.find(params[:warehouse_id])
+    @part = Part.find(params[:id])
+    WarehousesPart.where("warehouse_id = ? AND part_id = ?", params[:warehouse_id], params[:id]).limit(params[:count]).destroy_all
+    redirect_to warehouse_parts_path(@warehouse)
+  end
+
+  def use
+    @warehouse = params[:warehouse_id]
+    @part = params[:id]
+    render :use
+  end
+
   private
 
   def part_params
