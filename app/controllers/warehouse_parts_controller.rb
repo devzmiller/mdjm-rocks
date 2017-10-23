@@ -1,4 +1,0 @@
-class WarehousesPartsController < ApplicationController
-
-  
-end

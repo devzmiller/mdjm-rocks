@@ -4,8 +4,8 @@ class PartsController < ApplicationController
       redirect_to new_session_path
 
     elsif is_manager?
-      if params[:name]
-        @warehouse = Warehouse.find_by(name: params[:name])
+      if params[:name] || params[:warehouse_id]
+        @warehouse = Warehouse.find_by(name: params[:name]) || Warehouse.find(params[:warehouse_id])
 
         if @warehouse == nil
           @errors = ["Warehouse doesn't exist"]
@@ -50,8 +50,8 @@ class PartsController < ApplicationController
   end
 
   def use
-    @warehouse = params[:warehouse_id]
-    @part = params[:id]
+    @warehouse = Warehouse.find(params[:warehouse_id])
+    @part = Part.find(params[:id])
     render :use
   end
 

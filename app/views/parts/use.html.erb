@@ -1,3 +1,4 @@
+<h2><%= @part.name %></h2>
 <%= form_tag warehouse_part_path(@warehouse, @part), method: "delete" do %>
   <%= label_tag "Number of Parts Used: " %>
   <%= text_field_tag :count %>
