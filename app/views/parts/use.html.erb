@@ -1,6 +1,14 @@
-<h2><%= @part.name %></h2>
-<%= form_tag warehouse_part_path(@warehouse, @part), method: "delete" do %>
-  <%= label_tag "Number of Parts Used: " %>
-  <%= text_field_tag :count %>
-  <%= submit_tag %>
-<% end %>
+<div id="use-part-form-container">
+  <h2><%= @part.name %></h2>
+  <%= form_tag warehouse_part_path(@warehouse, @part), method: "delete", id: "use-part-form" do %>
+    <div class="form-section">
+      <%= label_tag "Number of Parts Used: " %>
+    </div>
+    <div class="form-section">
+      <%= text_field_tag :count %>
+    </div>
+    <div class="form-section">
+      <%= submit_tag %>
+    </div>
+  <% end %>
+</div>
