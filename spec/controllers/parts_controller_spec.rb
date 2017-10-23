@@ -111,4 +111,18 @@ describe PartsController, type: :controller do
       expect(response).to redirect_to warehouse_parts_path(warehouse)
     end
   end
+
+  describe '#use' do
+    let!(:warehouse_part) {WarehousesPart.create!(warehouse: warehouse, part: part)}
+    before(:each) { get :use, params: {warehouse_id: warehouse.id, id: part.id} }
+    it 'assigns a warehouse instance variable' do
+      expect(assigns[:warehouse]).to eq warehouse
+    end
+    it 'assigns a part instance variable' do
+      expect(assigns[:part]).to eq part
+    end
+    it 'renders use view' do
+      expect(response).to render_template :use
+    end
+  end
 end
