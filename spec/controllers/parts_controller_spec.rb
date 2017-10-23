@@ -92,4 +92,23 @@ describe PartsController, type: :controller do
       end
     end
   end
+
+  describe "#destroy" do
+    let!(:warehouse_part) {WarehousesPart.create!(warehouse: warehouse, part: part)}
+    it 'assigns a warehouse instance variable' do
+      delete :destroy, params: {warehouse_id: warehouse.id, id: part.id, count: 1}
+      expect(assigns[:warehouse]).to eq warehouse
+    end
+    it 'assigns a part instance variable' do
+      delete :destroy, params: {warehouse_id: warehouse.id, id: part.id, count: 1}
+      expect(assigns[:part]).to eq part
+    end
+    it 'destroys the requested number of parts' do
+      expect{ delete :destroy, params: {warehouse_id: warehouse.id, id: part.id, count: 1} }.to change {WarehousesPart.count}.by(-1)
+    end
+    it 'redirects to warehouse_parts_path' do
+      delete :destroy, params: {warehouse_id: warehouse.id, id: part.id, count: 1}
+      expect(response).to redirect_to warehouse_parts_path(warehouse)
+    end
+  end
 end

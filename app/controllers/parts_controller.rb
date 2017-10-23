@@ -5,7 +5,7 @@ class PartsController < ApplicationController
 
     elsif is_manager?
       if params[:name] || params[:warehouse_id]
-        @warehouse = Warehouse.find_by(name: params[:name]) || Warehouse.find(params[:warehouse_id])
+        @warehouse = Warehouse.find_by(name: params[:name]) || Warehouse.find_by(id: params[:warehouse_id])
 
         if @warehouse == nil
           @errors = ["Warehouse doesn't exist"]
