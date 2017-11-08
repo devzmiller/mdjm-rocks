@@ -10,6 +10,17 @@ Clone the repository and `bundle install`. Optionally, also `bundle exec rails d
 
 ### Screenshots
 
+![login page of website](app/assets/images/login-screen.PNG "login page of website")
+Login/homepage of website
+
+![company-wide inventory view](app/assets/images/inventory.PNG "company-wide inventory view")
+View company-wide inventory
+
+![order list view](app/assets/images/orders.PNG "order list view")
+View and create orders
+
+![receiving orders view](app/assets/images/receive-order.PNG "receiving orders view")
+Receive an order
 
 ### Team
 
